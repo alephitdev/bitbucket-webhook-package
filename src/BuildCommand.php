@@ -3,6 +3,7 @@
 namespace AlephIt\BitbucketWebhook;
 
 use Illuminate\Console\Command;
+use Illuminate\Support\Facades\Artisan;
 
 class BuildCommand extends Command
 {
@@ -14,7 +15,15 @@ class BuildCommand extends Command
     {
         $branch = $this->argument('branch');
 
+        echo "<pre>Deploying {$branch} branch</pre>";
+
         $output = shell_exec("git pull origin {$branch}");
         echo "<pre>$output</pre>";
+
+        echo "<pre>Running database migration</pre>";
+        Artisan::call("migrate --seed");
+        echo "<pre>Database migration complete</pre>";
+
+        echo "<pre>Deployment complete</pre>";
     }
 }
