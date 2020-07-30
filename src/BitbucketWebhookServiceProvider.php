@@ -9,7 +9,7 @@ final class BitbucketWebhookServiceProvider extends  ServiceProvider
     public function boot()
     {
         // console routes
-        $this->loadRoutesFrom(__DIR__ . "../routes/web.php");
+        $this->loadRoutesFrom(__DIR__ . "/../routes/web.php");
     }
 
     public function register()
