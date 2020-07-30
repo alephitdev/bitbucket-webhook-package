@@ -10,6 +10,7 @@ Route::post("/build", function(Request $request) {
     echo "<pre>Deploying {$branch} branch</pre>";
     Artisan::call("build {$branch}");
     echo "<pre>Running database migration</pre>";
-    Artisan::call("migrate --seed");
+    $output = Artisan::call("migrate --seed");
+    echo "<pre>$output</pre>";
     echo "<pre>Deployment complete</pre>";
 });
