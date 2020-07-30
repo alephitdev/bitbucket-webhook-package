@@ -20,6 +20,9 @@ class BuildCommand extends Command
         $output = shell_exec("git pull origin {$branch}");
         echo "<pre>$output</pre>";
 
+        $output = shell_exec("composer install --no-dev");
+        echo "<pre>$output</pre>";
+
         echo "<pre>Running database migration</pre>";
         Artisan::call("migrate --seed");
         echo "<pre>Database migration complete</pre>";
