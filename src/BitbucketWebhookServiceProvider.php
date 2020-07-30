@@ -13,10 +13,8 @@ final class BitbucketWebhookServiceProvider extends  ServiceProvider
 
     public function register()
     {
-        if ($this->app->runningInConsole()) {
-            $this->commands([
-                BuildCommand::class
-            ]);
-        }
+        $this->commands([
+            BuildCommand::class
+        ]);
     }
 }
