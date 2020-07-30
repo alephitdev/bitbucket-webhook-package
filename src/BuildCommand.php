@@ -14,12 +14,7 @@ class BuildCommand extends Command
     {
         $branch = $this->argument('branch');
 
-        $this->comment("Deploying {$branch} branch");
         $output = shell_exec("git pull origin {$branch}");
         echo "<pre>$output</pre>";
-        $this->comment("Running database migration");
-        $output = shell_exec("php artisan migrate");
-        echo "<pre>$output</pre>";
-        $this->comment("Deployment complete");
     }
 }
