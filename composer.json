@@ -1,0 +1,45 @@
+{
+    "name": "alephit/bitbucket-webhook-package",
+    "description": "Bitbucket webhook package.",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Aleph IT Dev Team",
+            "email": "support@alephit.com.au"
+        }
+    ],
+    "require": {
+        "php": "^7.2.31",
+        "illuminate/console": "^v7.22.4",
+        "illuminate/support": "^v7.22.4"
+    },
+    "require-dev": {
+        "malukenho/mcbumpface": "^1.1.2",
+        "phpunit/phpunit": "^8.5.8"
+    },
+    "autoload": {
+        "psr-4": {
+            "AlephIt\\BitbucketWebhook\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "AlephIt\\BitbucketWebhookTest\\": "tests/"
+        }
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-master": "1.x-dev"
+        },
+        "laravel": {
+            "providers": [
+                "AlephIt\\BitbucketWebhook\\BitbucketWebhookServiceProvider"
+            ]
+        }
+    },
+    "config": {
+        "sort-packages": true
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true
+}

@@ -1,0 +1,22 @@
+<?php
+
+namespace AlephIt\BitbucketWebhook;
+
+use Illuminate\Console\Command;
+
+class BuildCommand extends Command
+{
+    protected $signature = "build {branch : The branch you want to build}";
+
+    protected $description = "Build the project";
+
+    public function handle()
+    {
+        $branch = $this->argument('branch');
+
+        $this->info("{$branch}");
+        shell_exec("git pull origin {$branch}");
+        shell_exec("php artisan migrate");
+        $this->comment("Building {$branch} complete");
+    }
+}
