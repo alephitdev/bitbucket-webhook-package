@@ -8,7 +8,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Removed
 - Removes --no-dev --no-scripts option when executing composer install
 
-- Database migration script 
 ## [0.2.0] - 2020-07-30
 ### Added
 - Database migration script 
