@@ -1,11 +1,6 @@
 <?php
 
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Route;
+use AlephIt\BitbucketWebhook\BuildController;
 
-Route::post("/build", function(Request $request) {
-    $data = collect($request->post());
-    $branch = $data->has("pullrequest") ? "develop" : "master";
-    Artisan::call("build {$branch}");
-});
+Route::post("/build", BuildController::class);
