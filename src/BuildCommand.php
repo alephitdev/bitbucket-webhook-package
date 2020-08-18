@@ -17,15 +17,23 @@ class BuildCommand extends Command
 
         echo "<pre>Deploying {$branch} branch</pre>";
 
-        $output = shell_exec("git pull origin {$branch}");
-        echo "<pre>$output</pre>";
+        shell_exec("git pull origin {$branch}");
+        echo "<pre>Pulled changes from {$branch}<br></pre>";
 
-        $output = shell_exec("composer install");
+        $output = shell_exec("composer install --no-dev --no-interaction --prefer-dist --optimize-autoloader");
         echo "<pre>$output</pre>";
 
         echo "<pre>Running database migration</pre>";
         Artisan::call("migrate --seed");
         echo "<pre>Database migration complete</pre>";
+
+        echo "<pre>Clearing Config, Cache, Config</pre>";
+        Artisan::call("view:clear");
+        Artisan::call("cache:clear");
+        Artisan::call("config:clear");
+
+        echo "<pre>Linking storage</pre>";
+        Artisan::call("storage:link");
 
         echo "<pre>Deployment complete</pre>";
     }
