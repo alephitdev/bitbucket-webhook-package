@@ -35,6 +35,11 @@ class BuildCommand extends Command
         echo "<pre>Linking storage</pre>";
         Artisan::call("storage:link");
 
+        echo "<pre>Caching content</pre>";
+        Artisan::call("view:cache");
+        Artisan::call("config:cache");
+        Artisan::call("route:cache");
+
         echo "<pre>Deployment complete</pre>";
     }
 }
