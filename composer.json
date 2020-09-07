@@ -10,8 +10,8 @@
     ],
     "require": {
         "php": "^7.4.8",
-        "illuminate/console": "^v7.25.0",
-        "illuminate/support": "^v7.25.0"
+        "illuminate/console": "^v7.27.0",
+        "illuminate/support": "^v7.27.0"
     },
     "require-dev": {
         "malukenho/mcbumpface": "^1.1.2",
