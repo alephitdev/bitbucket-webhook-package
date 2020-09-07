@@ -7,7 +7,7 @@ namespace AlephIt\BitbucketWebhook;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Artisan;
 
-class BuildCommand extends Command
+final class BuildCommand extends Command
 {
     protected $signature = "build {branch : The branch you want to build}";
 
@@ -16,20 +16,23 @@ class BuildCommand extends Command
     public function handle()
     {
         $branch = $this->argument('branch');
-        echo "<pre>Deploying {$branch} branch</pre><br>";
+        echo "<pre>Deploying changes to '{$branch}' branch</pre>";
+
+        chdir(getcwd() . "/../");
 
         $this->pullChanges($branch);
         $this->composerInstallation();
         $this->migrateAndSeedNecessaryData();
         $this->purgeCache();
+        $this->linkStorage();
 
         echo "<pre>Deployment complete</pre><br>";
     }
 
     private function pullChanges(string $branch): void
     {
-        shell_exec("git pull origin {$branch}");
-        echo "<pre>Pulled changes from {$branch}<br></pre>";
+        $output = shell_exec("git pull origin {$branch}");
+        echo "<pre>Changes: $output</pre>";
     }
 
     private function composerInstallation(): void
@@ -38,7 +41,8 @@ class BuildCommand extends Command
         $noInteraction = "--no-interaction";
         $preferDist = "--prefer-dist";
         $optimizedAutoloader = "--optimize-autoloader";
-        $output = shell_exec("composer install {$noDev}  {$noInteraction} {$preferDist} {$optimizedAutoloader}");
+
+        $output = exec("composer install {$noDev} {$noInteraction} {$preferDist} {$optimizedAutoloader}");
         echo "<pre>$output</pre>";
     }
 
@@ -51,7 +55,7 @@ class BuildCommand extends Command
 
     private function purgeCache(): void
     {
-        echo "<pre>Clearing Config, Cache, Config</pre>";
+        echo "<pre>Purging all cache</pre>";
         Artisan::call("view:clear");
         Artisan::call("config:clear");
         Artisan::call("route:clear");
