@@ -24,7 +24,6 @@ final class BuildCommand extends Command
         $this->composerInstallation();
         $this->migrateAndSeedNecessaryData();
         $this->purgeCache();
-        $this->linkStorage();
 
         echo "<pre>Deployment complete</pre><br>";
     }
@@ -65,11 +64,5 @@ final class BuildCommand extends Command
         Artisan::call("view:cache");
         Artisan::call("config:cache");
         Artisan::call("route:cache");
-    }
-
-    private function linkStorage(): void
-    {
-        echo "<pre>Linking storage</pre>";
-        Artisan::call("storage:link");
     }
 }
